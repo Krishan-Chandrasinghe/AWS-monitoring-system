@@ -5,7 +5,7 @@ A production-grade system monitoring solution built on AWS EC2 using Docker, Pro
 ---
 
 ## 📌 Architecture Overview
-
+```
 [ AWS EC2 Instance ]
   └── Node Exporter (Port 9100) ──> Scrapes host system metrics
          │
@@ -18,6 +18,21 @@ A production-grade system monitoring solution built on AWS EC2 using Docker, Pro
          ▼
    Discord Webhook             ──> Delivers real-time Firing/Resolved alerts
 
+┌────────────────────────────────────────────────────────────────────────┐
+│                          AWS EC2 Instance                              │
+│                                                                        │
+│   ┌─────────────────┐        ┌───────────────┐      ┌──────────────┐   │
+│   │  Node Exporter  │ ────>  │  Prometheus   │ ───> │   Grafana    │   │
+│   │   (Port 9100)   │        │  (Port 9090)  │      │ (Port 3000)  │   │
+│   └─────────────────┘        └───────────────┘      └──────┬───────┘   │
+└────────────────────────────────────────────────────────────┼───────────┘
+│                                                            ▼
+▼                                                    ┌──────────────────┐
+┌────────────────┐                                   │ Visualizes data  │
+│ Discord Alert  │                                   │   & evaluates    │
+│    Webhook     │                                   │   alert rules    │
+└────────────────┘                                   └──────────────────┘
+```
 ---
 
 ## 🚀 Tech Stack
