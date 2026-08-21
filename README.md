@@ -87,18 +87,18 @@ Allow inbound traffic for the monitoring services via your AWS EC2 Console:
 
 SSH into your EC2 server and run:
 
-# Clone the repository
+#### Clone the repository
 ```
 git clone https://github.com/Krishan-Chandrasinghe/AWS-monitoring-system.git
 cd AWS-monitoring-system
 ```
 
-# Spin up all containerized services in detached mode
+#### Spin up all containerized services in detached mode
 ```
 docker compose up -d
 ```
 
-# Verify that all three containers are running
+#### Verify that all three containers are running
 ```
 docker ps
 ```
@@ -107,16 +107,16 @@ docker ps
 To ensure all monitoring components are working properly, open your browser and test the following endpoints:
 
 1. Node Exporter Metrics:
-   Navigate to: http://<YOUR_EC2_PUBLIC_IP>:9100/metrics
-   Expected Result: A raw text page containing raw system metrics (e.g., node_cpu_seconds_total).
+   + Navigate to: http://<YOUR_EC2_PUBLIC_IP>:9100/metrics
+   + Expected Result: A raw text page containing raw system metrics (e.g., node_cpu_seconds_total).
 
 2. Prometheus Web UI:
-   Navigate to: http://<YOUR_EC2_PUBLIC_IP>:9090
-   Expected Result: Prometheus UI loads. Go to Status -> Targets to ensure node-exporter status shows UP (1/1).
+   + Navigate to: http://<YOUR_EC2_PUBLIC_IP>:9090
+   + Expected Result: Prometheus UI loads. Go to Status -> Targets to ensure node-exporter status shows UP (1/1).
 
 3. Grafana Dashboard:
-   Navigate to: http://<YOUR_EC2_PUBLIC_IP>:3000
-   Expected Result: Grafana login screen appears.
+   + Navigate to: http://<YOUR_EC2_PUBLIC_IP>:3000
+   + Expected Result: Grafana login screen appears.
 
 ---
 
@@ -181,12 +181,12 @@ Go to Alerting -> Alert rules -> Create alert rule to set up system monitors:
 
 To verify end-to-end alert delivery, simulate high CPU load directly on your EC2 instance:
 
-# Install stress testing utility
+### Install stress testing utility
 ```
 sudo apt update && sudo apt install stress -y
 ```
 
-# Generate 100% CPU load across 2 cores for 2 minutes
+### Generate 100% CPU load across 2 cores for 2 minutes
 ```
 stress --cpu 2 --timeout 120s
 ```
@@ -194,7 +194,3 @@ stress --cpu 2 --timeout 120s
 Within 1-2 minutes, Grafana will trigger an alert and dispatch a [FIRING] notification to your Discord channel. Once the load normalizes, an automated [RESOLVED] notification will follow.
 
 ---
-
-## 📄 License
-
-This project is open-source and available under the MIT License.
